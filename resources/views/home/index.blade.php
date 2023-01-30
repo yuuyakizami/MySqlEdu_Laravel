@@ -10,5 +10,4 @@
 @endsection
 @section('footer')
 <div class="mx-auto justify-content-center"><h1>Mysql Edu</h1></div>
-
 @endsection
