@@ -43,13 +43,20 @@ Route::get('tutorial/create', function(){
 // Store the Tutorial Created
 Route::post('tutorial', function(Request $request){
        // dd($request);
+    $request->validate([
+        'title' => 'required|max:50',
+        'title_description' => 'required',
+        'title_lesson' => 'required',
+    ]);
        $tutorial = new Tutorial();
        $tutorial->title = $request->input('title');
        $tutorial->video = $request->input('video', 'My Video');
        $tutorial->title_description = $request->input('title_description');
        $tutorial->title_lesson = $request->input('title_lesson');
        $tutorial->save();
+       $request->session()->flash('status-create', 'New Tutorial Added');
        return redirect()->route('index-tutorial', ['tutorial' => $tutorial->id]);
+       
 })->name('store-tutorial');
 
 
@@ -65,7 +72,8 @@ Route::get('tutorial/{id}', function($id){
 Route::delete('tutorial/{id}',function($id){
     $tutorial = Tutorial::findOrFail($id);
     $tutorial->delete();
-    return redirect()->route('index-tutorial'); 
+    
+    return redirect()->route('index-tutorial')->with('status-delete', 'A Tutorial is Deleted'); 
 })->name('delete-tutorial');
 
 // Edit one tutorial by id
@@ -81,7 +89,11 @@ Route::put('tutorial/{id}', function(Request $request, $id){
     //     'title' => 'required|unique:posts|max:255',
     //     'body' => 'required',
     // ]);
-    
+    $request->validate([
+        'title' => 'required'
+    ]);
+
+
     // $validated = $validator->validated();
     $tutorial = Tutorial::findOrFail($id);
     // $validator = $request->validated();
@@ -91,7 +103,7 @@ Route::put('tutorial/{id}', function(Request $request, $id){
     $tutorial->title_lesson = $request->input('title_lesson');
     $tutorial->save();
     return view('tutorial.show')->with('tutorial', $tutorial);
-    $request->session()->flash('status', 'Tutorial is Updated');
-})->name('update-tutorial');
+    $request->session()->flash('status-update', 'Tutorial is Updated');
+})->where('id', '[0-9]+')->name('update-tutorial');
 
 

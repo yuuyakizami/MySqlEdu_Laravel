@@ -15,42 +15,81 @@
 </head>
 <body>
     {{-- Navigation --}}
-    <div class="container-fluid mb-5 bg-white shadow-sm">
-        <nav class="navbar">
-        <div class="navbar-brand ml-3 mp-3">MySqlEdu @yield('title')</div>
-        <ul class="nav row justify-content-end">
-            <li class="nav-item col-auto"><a class="nav-link" href="{{ route('home.index')}}" role="button">Home</a></li>
-            <li class="nav-item col-auto"><a class="nav-link" href="{{ route('message.create')}}" role="button">Message</a></li>
-            <li class="nav-item col-auto"><a class="nav-link" href="{{ route('home.about')}}" role="button">About</a></li>
-            @guest
-            <li class="nav-item col-auto"><a class="nav-link" href="{{ route('index-tutorial')}}">Show Tutorials</a></li>
-            <li class="nav-item col-auto"><a class="nav-link" href="{{ route('create-tutorial')}}">Create Tutorial</a></li>
-            <li class="nav-item col-auto"><a class="nav-link" href="{{ route('register')}}" role="button">Register</a></li>
-            <li class="nav-item col-auto"><a class="nav-link" href="{{ route('login')}}" role="button">Login</a></li>
-             {{-- Tutorial --}}
-             {{-- @auth() --}}
-             @else
-             @auth()
-             <li class="nav-item col-auto"><a class="nav-link href="{{ route('logout')}} onclick="event.preventDefault();document.getElementById('logout-form').submit();" role="button">Logout</a></li>
-             <form id="logout-form" action="{{ route('logout')}}" method="post" style="display: none">@csrf</form>
-             @endauth
-            @endguest
+    <nav class="navbar navbar-expand-lg bg-light mb-4 shadow">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">MySqlEdu @yield('title')</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              {{-- <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"></a>
+              </li> --}}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('home.index')}}" role="button">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('message.create')}}" role="button">Message</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('home.about')}}" role="button">About</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('index-tutorial')}}">Show Tutorials</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('create-tutorial')}}">Create Tutorial</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link"  href="{{ route('register')}}" role="button">Register</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link"  href="{{ route('login')}}" role="button">Login</a>
+              </li>
+         
+            @auth()
+            <li class="nav-item">
+              <a class="nav-link"  href="{{ route('logout')}} onclick="event.preventDefault();document.getElementById('logout-form').submit();" role="button">Logout</a>
+              <form id="logout-form" action="{{ route('logout')}}" method="post" style="display: none">@csrf</form>
+          </li>
         </ul>
-        </nav>
-    </div>
-    <div class="container-sm">
-        @if(session('status'))
+          @endauth
+          </div>
+        </div>
+      </nav>
+    {{-- <div class="container-sm"> --}}
+        {{-- @if(session('status'))
         <div class="alert alert-success" role="alert">
             {{session('status')}}
         </div>
-        @endif
+        @endif --}}
     @yield('content')
 
-    </div>
-    {{-- mr-md-auto --}}
+    {{-- </div> --}}
     {{-- Footer Content --}}
-    <div class="container-fluid fixed-bottom" style="background-color: coral">
-        @yield('footer')
-        </div>
+    <div class="container border-bottom border-top">
+        {{-- @yield('footer') --}}
+        <footer class="py-3 my-4">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                <li class="nav-item">
+                    <a class="nav-link px-2 text-muted" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 text-muted" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link px-2 text-muted" href="#">Message</a>
+                </li>
+            </ul>
+            <p class="text-center text-muted">MySqlEdu</p>
+        </footer>
+    </div>
 </body>
 </html>
