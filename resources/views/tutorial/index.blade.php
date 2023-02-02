@@ -42,55 +42,7 @@
         </a>
       </li>
     </ul>
-    <hr>
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
-      </a>
-      <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="#">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#">Sign out</a></li>
-      </ul>
-    </div>
   </div>
 </main>
-
-
-
-
-
-
-<div class="container">
-    @if(session()->has('status-update'))
-        <div class="alert alert-success mb-3" role="alert">{{session()->get('status-update')}}</div>
-    @elseif (session()->has('status-create'))
-        <div class="alert alert-success mb-3" role="alert">{{session()->get('status-create')}}</div>
-    @elseif (session()->has('status-delete'))
-    <div class="alert alert-warning mb-3" role="alert">{{session()->get('status-delete')}}</div>
-    @else
-    @endif
-    @forelse($tutorial as $item)
-    <div class="list-group">
-        <div class="card mb-3 shadow-sm">
-            <div class="card-header">
-                <h3 class="fw-bold">MySql Lesson #{{$item->id}}</h3>
-            </div>
-            <div class="card-body">
-                <h5 class="card-title"> {{$item->title}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{$item->title_description}}</h6>
-                <p class="card-text">{{$item->title_lesson}}</p>
-                <a class="btn btn-primary" href="{{route('show-tutorial', $item->id)}}">Go to Lesson</a>
-            </div>
-        </div>
-    </div>
-    @empty
-    <div class="alert alert-success" role="alert">No Available Lesson</div>
-    
-@endforelse
-</div>
 @endsection
 {{-- @endforelse --}}
