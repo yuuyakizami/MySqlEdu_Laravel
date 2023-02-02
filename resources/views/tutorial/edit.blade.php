@@ -3,7 +3,7 @@
 @section('title', "Update Tutorial")
 
 @section('content')
-<form class="form-group container-sm" action="{{ route('update-tutorial', $tutorial->id)}}" method="POST">
+<form class="form-group container-sm" action="{{ route('tutorial.update', $tutorial->id)}}" method="POST">
 @csrf
 {{-- Method Directive --}}
 @method('PUT') 

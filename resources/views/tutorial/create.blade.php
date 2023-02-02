@@ -3,7 +3,7 @@
 @section('title', "Create Tutorial")
 
 @section('content')
-<form class="form-group container-sm" action="{{ route('store-tutorial')}}" method="POST">
+<form class="form-group container-sm" action="{{ route('tutorial.store')}}" method="POST">
 @csrf
 <div><label class="form-label" for="title">Title:</div>
 <div><input class="form-control mb-3" type="text" name="title" value="{{ old('title', optional($tutorial ?? null)->title)}}"></div>
